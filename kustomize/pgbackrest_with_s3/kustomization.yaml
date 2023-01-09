@@ -1,9 +1,7 @@
-#namespace: postgres-operator
-
 secretGenerator:
 - name: acid-cluster-1-s3-credentials
   files:
-  - s3.conf
+  - s3.configuration
 
 generatorOptions:
   disableNameSuffixHash: true
