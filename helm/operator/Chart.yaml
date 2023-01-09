@@ -1,7 +1,7 @@
 apiVersion: v2
 type: application
 name: postgres-operator
-description: Helm-Chart to set ups an Instance of the Postgres-Operator from CYBERTEC
+description: Helm-Chart for setting up an instance of CYBERTEC's Postgres operator.
 
 appVersion: 0.2.0
 version: 0.2.0
