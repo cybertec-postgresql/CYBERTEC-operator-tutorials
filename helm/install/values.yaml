@@ -1,0 +1,20 @@
+---
+
+# singleNamespace controls where PGO watches for PostgresClusters. When false,
+# PGO watches for and responds to PostgresClusters in all namespaces. When true,
+# PGO watches only the namespace in which it is installed.
+singleNamespace: false
+
+# debug allows you to enable or disable the "debug" level of logging.
+debug: true
+
+# imagePullSecretNames is a list of secret names to use for pulling controller images.
+# More info: https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
+imagePullSecretNames: []
+
+
+# Define the operator settings to add to the configmap
+operatorSettings:
+  operatorImage: 'docker.io/cybertecpostgresql/cybertec-os-operator:0.2.0-1'
+  namespace: '*'
+  enable_pod_antiaffinity: 'true'

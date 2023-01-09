@@ -1,0 +1,8 @@
+apiVersion: v2
+type: application
+name: postgres-operator
+description: Helm-Chart to set ups an Instance of the Postgres-Operator from CYBERTEC
+
+appVersion: 0.2.0
+version: 0.2.0
+# Note: Make sure you have defined the correct version, based on the crd used

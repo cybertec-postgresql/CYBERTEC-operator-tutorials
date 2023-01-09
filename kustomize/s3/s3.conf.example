@@ -1,0 +1,4 @@
+[global]
+repo1-s3-key=YOUR_S3_ACCESS_KEY
+repo1-s3-key-secret=YOUR_S3_KEY_SECRET
+repo1-cipher-pass=YOUR_ENCRYPTION_PASSPHRASE

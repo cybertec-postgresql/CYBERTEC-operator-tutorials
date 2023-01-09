@@ -1,0 +1,38 @@
+apiVersion: acid.zalan.do/v1
+kind: postgresql
+metadata:
+  name: acid-cluster-1
+spec:
+ dockerImage: 'docker.io/cybertecpostgresql/cybertec-os-container:postgres-rocky-14.6-1-dev'
+  numberOfInstances: 1
+  postgresql:
+    version: '14'
+  postgresVersion: 14
+  resources:
+      limits:
+        cpu: 500m
+        memory: 500Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
+    teamId: acid
+    volume:
+      size: 5Gi
+  backup:
+      pgbackrest:
+        configuration:
+          secret: acid-cluster-1-s3-credentials
+        global:
+          repo1-path: /YOUR_PATH_INSIDE_THE_BUCKET/repo1/
+          repo1-retention-full: '7'
+          repo1-retention-full-type: count
+        image: >-
+          docker.io/cybertecpostgresql/cybertec-os-container:pgbackrest-rocky-14.6-4-dev
+        repos:
+          - endpoint: YOUR_S3_ENDPOINT
+            name: repo1
+            region: YOUR_S3_REGION
+            resource: YOUR_BUCKET_NAME
+            schedule:
+              full: 30 2 * * *
+            storage: s3
