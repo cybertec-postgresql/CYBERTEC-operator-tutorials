@@ -1,20 +1,20 @@
 apiVersion: acid.zalan.do/v1
 kind: postgresql
 metadata:
-  name: acid-cluster-1
+  name: acid-ha-cluster-1
 spec:
   dockerImage: 'docker.io/cybertecpostgresql/cybertec-os-container:postgres-rocky-14.6-1-dev'
   numberOfInstances: 2
   postgresql:
     version: '14'
-  postgresVersion: 14
   resources:
-      limits:
-        cpu: 500m
-        memory: 500Mi
-      requests:
-        cpu: 100m
-        memory: 100Mi
-    teamId: acid
-    volume:
-      size: 5Gi
+    limits:
+      cpu: 500m
+      memory: 500Mi
+    requests:
+      cpu: 100m
+      memory: 100Mi
+  teamId: acid
+  volume:
+    size: 5Gi
+
