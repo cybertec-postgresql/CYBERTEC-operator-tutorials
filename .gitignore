@@ -1,0 +1,4 @@
+# exclude some folders
+setup/helm/configmap.yaml
+setup/monitoring
+setup/operator

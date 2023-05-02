@@ -15,6 +15,7 @@ spec:
     metadata:
       labels:
         name: postgres-operator
+        cpo.cybertec.at/pod-type: postgres-operator
     spec:
       serviceAccountName: postgres-operator
       containers:

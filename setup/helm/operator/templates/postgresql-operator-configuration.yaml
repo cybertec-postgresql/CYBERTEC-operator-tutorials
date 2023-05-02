@@ -20,12 +20,17 @@ configuration:
   resync_period: 30m
   repair_period: 5m
   # set_memory_request_to_limit: false
-  # sidecars:
-  # - image: image:123
-  #   name: global-sidecar-1
-  #   ports:
-  #   - containerPort: 80
-  #     protocol: TCP
+  sidecars:
+    - env:
+        - name: DATA_SOURCE_NAME
+          value: >-
+            postgresql://postgres_exporter:password@localhost:5432/postgres?sslmode=disable
+      image: 'docker.io/schmaetz/postgres-exporter:rocky-0.2.19'
+      name: postgres-exporter
+      ports:
+        - containerPort: 9187
+          name: http
+          protocol: TCP
   workers: 8
   users:
     # additional_owner_roles: 
@@ -66,7 +71,6 @@ configuration:
     enable_sidecars: true
     # ignored_annotations:
     # - k8s.v1.cni.cncf.io/network-status
-    infrastructure_roles_secret_name: "cpo_monitoring"
     infrastructure_roles_secrets:
     - secretname: "cpo-monitoring-role"
       userkey: "user"
