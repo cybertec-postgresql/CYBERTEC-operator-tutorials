@@ -20,17 +20,17 @@ configuration:
   resync_period: 30m
   repair_period: 5m
   # set_memory_request_to_limit: false
-  sidecars:
-    - env:
-        - name: DATA_SOURCE_NAME
-          value: >-
-            postgresql://postgres_exporter:password@localhost:5432/postgres?sslmode=disable
-      image: 'docker.io/schmaetz/postgres-exporter:rocky-0.2.19'
-      name: postgres-exporter
-      ports:
-        - containerPort: 9187
-          name: http
-          protocol: TCP
+  #sidecars:
+  #  - env:
+  #      - name: DATA_SOURCE_NAME
+  #        value: >-
+  #          postgresql://postgres_exporter:password@localhost:5432/postgres?sslmode=disable
+  #    image: 'docker.io/schmaetz/postgres-exporter:rocky-0.2.19'
+  #    name: postgres-exporter
+  #    ports:
+  #      - containerPort: 9187
+  #        name: http
+  #        protocol: TCP
   workers: 8
   users:
     # additional_owner_roles: 
