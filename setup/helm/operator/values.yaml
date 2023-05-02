@@ -15,6 +15,9 @@ imagePullSecretNames: []
 
 # Define the operator settings to add to the configmap
 operatorSettings:
-  operatorImage: 'docker.io/cybertecpostgresql/cybertec-pg-operator:0.3.0-1'
+  operatorImage: 'docker.io/cybertecpostgresql/cybertec-pg-operator:0.5.0-2'
   namespace: '*'
   enable_pod_antiaffinity: 'true'
+  operator_namespace: 'zalando'
+
+
