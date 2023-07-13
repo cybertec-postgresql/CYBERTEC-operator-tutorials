@@ -3,7 +3,7 @@ kind: postgresql
 metadata:
   name: cluster-1
 spec:
-  dockerImage: 'docker.io/cybertecpostgresql/cybertec-os-container:postgres-rocky-14.6-1-dev'
+  #dockerImage: 'docker.io/cybertecpostgresql/cybertec-os-container:postgres-rocky-14.6-1-dev'
   numberOfInstances: 1
   postgresql:
     version: '14'

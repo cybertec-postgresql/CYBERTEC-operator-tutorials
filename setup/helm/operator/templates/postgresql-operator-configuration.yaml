@@ -3,7 +3,7 @@ kind: OperatorConfiguration
 metadata:
   name: postgresql-operator-configuration
 configuration:
-  docker_image: registry.opensource.zalan.do/acid/spilo-14:2.1-p7
+  docker_image: docker.io/cybertecpostgresql/cybertec-pg-container:postgres-15.2-4
   # enable_crd_registration: true
   # crd_categories:
   # - all
@@ -38,14 +38,14 @@ configuration:
     enable_password_rotation: false
     password_rotation_interval: 90
     password_rotation_user_retention: 180
-    replication_username: standby
+    replication_username: cpo_replication
     super_username: postgres
   major_version_upgrade:
     major_version_upgrade_mode: "manual"
     # major_version_upgrade_team_allow_list:
     # - acid
-    minimal_major_version: "10"
-    target_major_version: "14"
+    minimal_major_version: "13"
+    target_major_version: "15"
   kubernetes:
     # additional_pod_capabilities:
     # - "SYS_NICE"
@@ -111,7 +111,7 @@ configuration:
     #   key: db-only
     #   operator: Exists
     #   effect: NoSchedule
-    # watched_namespace: ""
+    watched_namespace: {{ .Values.operatorSettings.watched_namespace | default * }}
   postgres_pod_resources:
     default_cpu_limit: "1"
     default_cpu_request: 100m

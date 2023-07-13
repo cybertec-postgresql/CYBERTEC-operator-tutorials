@@ -2,3 +2,4 @@
 setup/helm/configmap.yaml
 setup/monitoring
 setup/operator
+setup/monitoring.tar.gz

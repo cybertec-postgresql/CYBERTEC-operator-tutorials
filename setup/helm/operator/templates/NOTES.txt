@@ -9,7 +9,7 @@ The operator has been successfully installed and is ready for use.
 
 Support for use can be found here: 
 Community mailing list: 
-Github project:         https://github.com/cybertec-postgresql/postgres-operator
+Github project:         https://github.com/cybertec-postgresql/postgres-pg-operator
 Documentation:
 
 Apache License Version 2.0
