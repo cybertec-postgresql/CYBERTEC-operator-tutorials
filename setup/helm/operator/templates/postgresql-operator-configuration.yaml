@@ -54,7 +54,7 @@ configuration:
       application: spilo
     cluster_name_label: cluster-name
     inherited_labels:
-    - cybertec_pgwatch
+    - cpo_monitoring_stack
     # custom_pod_annotations:
     #   keya: valuea
     #   keyb: valueb
