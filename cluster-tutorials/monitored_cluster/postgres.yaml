@@ -2,6 +2,8 @@ apiVersion: acid.zalan.do/v1
 kind: postgresql
 metadata:
   name: cluster-1
+  labels: 
+    cpo_monitoring_stack: 'true'
 spec:
   dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-15.2-5'
   numberOfInstances: 1
@@ -19,6 +21,7 @@ spec:
   teamId: acid
   volume:
     size: 5Gi
+    #storageClass: default-provisioner
   sidecars:
     - env:
         - name: DATA_SOURCE_URI
