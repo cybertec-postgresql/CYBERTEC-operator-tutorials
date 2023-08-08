@@ -1,0 +1,44 @@
+apiVersion: acid.zalan.do/v1
+kind: postgresql
+metadata:
+  name: cluster-1
+spec:
+  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-15.2-5'
+  numberOfInstances: 1
+  postgresql:
+    version: '14'
+    parameters:
+      shared_preload_libraries: 'pg_stat_statements,pgnodemx'
+  resources:
+    limits:
+      cpu: 500m
+      memory: 500Mi
+    requests:
+      cpu: 100m
+      memory: 100Mi
+  teamId: acid
+  volume:
+    size: 5Gi
+  sidecars:
+    - env:
+        - name: DATA_SOURCE_URI
+          value: 'localhost:5432/postgres?sslmode=disable'
+        - name: DATA_SOURCE_USER
+          valueFrom:
+            secretKeyRef:
+              key: username
+              name: cpo-exporter.cluster-1.credentials.postgresql.acid.zalan.do
+        - name: DATA_SOURCE_PASS
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: cpo-exporter.cluster-1.credentials.postgresql.acid.zalan.do
+      image: 'docker.io/cybertecpostgresql/cybertec-pg-container:exporter-0.6.0-1'
+      name: postgres-exporter
+      ports:
+        - containerPort: 9187
+          name: http
+          protocol: TCP
+  users:
+    cpo_exporter:
+      - login
