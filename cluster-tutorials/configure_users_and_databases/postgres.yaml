@@ -17,4 +17,7 @@ spec:
   teamId: acid
   volume:
     size: 5Gi
+  users:
+    applikationsuser:
+      - login
     #storageClass: default-provisioner
