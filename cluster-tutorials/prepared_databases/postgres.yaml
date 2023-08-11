@@ -7,6 +7,17 @@ spec:
   numberOfInstances: 1
   postgresql:
     version: '15'
+  preparedDatabases:
+    bar:
+      defaultUsers: true
+      extensions:
+        pg_partman: public
+        pgcrypto: public
+      schemas:
+        data: {}
+        history:
+          defaultRoles: true
+          defaultUsers: false
   resources:
     limits:
       cpu: 500m
