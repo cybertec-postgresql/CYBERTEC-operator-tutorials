@@ -11,6 +11,7 @@ spec:
     version: '16'
     parameters:
       shared_preload_libraries: 'pg_stat_statements,pgnodemx'
+      password_encryption: "scram-sha-256"
   resources:
     limits:
       cpu: 500m
