@@ -1,5 +1,5 @@
 secretGenerator:
-- name: acid-cluster-1-s3-credentials
+- name: cluster-1-s3-credentials
   files:
   - s3.configuration
 
