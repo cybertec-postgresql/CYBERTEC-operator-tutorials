@@ -1,14 +1,14 @@
-apiVersion: acid.zalan.do/v1
+apiVersion: cpo.opensource.cybertec.at/v1
 kind: postgresql
 metadata:
   name: cluster-1
   labels: 
     cpo_monitoring_stack: 'true'
 spec:
-  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-15.2-5'
+  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-rocky9-16.0-1-1'
   numberOfInstances: 1
   postgresql:
-    version: '15'
+    version: '16'
     parameters:
       shared_preload_libraries: 'pg_stat_statements,pgnodemx'
   resources:
