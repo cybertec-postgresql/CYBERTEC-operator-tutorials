@@ -17,7 +17,7 @@ spec:
         name: postgres-operator
         cpo.cybertec.at/pod-type: postgres-operator
     spec:
-      serviceAccountName: postgres-operator
+      serviceAccountName: cpo-operator
       containers:
       - name: postgres-operator
         image: {{ .Values.operatorSettings.operatorImage }}
