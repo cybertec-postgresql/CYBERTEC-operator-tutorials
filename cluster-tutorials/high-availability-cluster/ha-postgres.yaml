@@ -3,12 +3,10 @@ kind: postgresql
 metadata:
   name: ha-cluster-1
 spec:
-  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-16.1-3-dev'
+  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-16.2-2-dev'
   numberOfInstances: 2
   postgresql:
     version: '16'
-    parameters:
-      password_encryption: "scram-sha-256"
   resources:
     limits:
       cpu: 500m
