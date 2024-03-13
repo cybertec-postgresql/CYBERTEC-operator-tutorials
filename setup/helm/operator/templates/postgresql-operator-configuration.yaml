@@ -45,13 +45,13 @@ configuration:
     # major_version_upgrade_team_allow_list:
     # - acid
     minimal_major_version: "13"
-    target_major_version: "15"
+    target_major_version: "16"
   kubernetes:
     # additional_pod_capabilities:
     # - "SYS_NICE"
     cluster_domain: cluster.local
     cluster_labels:
-      application: spilo
+      application: cpo
     cluster_name_label: cluster-name
     inherited_labels:
     - cpo_monitoring_stack
@@ -71,11 +71,11 @@ configuration:
     enable_sidecars: true
     # ignored_annotations:
     # - k8s.v1.cni.cncf.io/network-status
-    infrastructure_roles_secrets:
-    - secretname: "cpo-monitoring-role"
-      userkey: "user"
-      passwordkey: "password"
-      rolekey: "inrole"
+    # infrastructure_roles_secrets:
+    # - secretname: "cpo-monitoring-role"
+    #   userkey: "user"
+    #   passwordkey: "password"
+    #   rolekey: "inrole"
     # - secretname: "other-infrastructure-role"
     #   userkey: "other-user-key"
     #   passwordkey: "other-password-key"
