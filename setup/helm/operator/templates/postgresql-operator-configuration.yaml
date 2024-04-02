@@ -3,7 +3,7 @@ kind: OperatorConfiguration
 metadata:
   name: postgresql-operator-configuration
 configuration:
-  docker_image: docker.io/cybertecpostgresql/cybertec-pg-container:postgres-15.2-4
+  docker_image: {{ .Values.operatorSettings.postgresImage }}
   # enable_crd_registration: true
   # crd_categories:
   # - all
@@ -52,7 +52,7 @@ configuration:
     cluster_domain: cluster.local
     cluster_labels:
       application: cpo
-    cluster_name_label: cluster-name
+    cluster_name_label: cluster.cpo.opensource.cybertec.at/name
     inherited_labels:
     - cpo_monitoring_stack
     # custom_pod_annotations:
@@ -95,7 +95,7 @@ configuration:
     # pod_environment_secret: "my-custom-secret"
     pod_management_policy: "ordered_ready"
     # pod_priority_class_name: "postgres-pod-priority"
-    pod_role_label: spilo-role
+    pod_role_label: member.cpo.opensource.cybertec.at/role
     # pod_service_account_definition: ""
     pod_service_account_name: cpo-pod
     # pod_service_account_role_binding_definition: ""
