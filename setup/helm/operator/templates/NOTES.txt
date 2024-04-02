@@ -13,4 +13,4 @@ Github project:         https://github.com/cybertec-postgresql/postgres-pg-opera
 Documentation:          https://cybertec-postgresql.github.io/CYBERTEC-pg-operator/
 
 Apache License Version 2.0
-Copyright 2022-2023 CYBERTEC PostgreSQL International GmbH
+Copyright 2022-2024 CYBERTEC PostgreSQL International GmbH

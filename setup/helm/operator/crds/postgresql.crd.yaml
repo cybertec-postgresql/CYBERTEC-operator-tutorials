@@ -340,6 +340,12 @@ spec:
                 type: object
                 additionalProperties:
                   type: string
+              monitor:
+                nullable: true
+                properties:
+                  image:
+                    type: string
+                type: object
               nodeAffinity:
                 type: object
                 properties:
