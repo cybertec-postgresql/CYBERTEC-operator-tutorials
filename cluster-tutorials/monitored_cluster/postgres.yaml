@@ -19,4 +19,4 @@ spec:
     size: 5Gi
     #storageClass: default-provisioner
   monitor:
-      image: docker.io/cybertecpostgresql/cybertec-pg-container:exporter-16.2-1-rc1
+      image: docker.io/cybertecpostgresql/cybertec-pg-container:exporter-16.2-2-rc1

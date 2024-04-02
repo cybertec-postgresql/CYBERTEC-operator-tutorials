@@ -25,8 +25,7 @@ spec:
           repo1-path: /YOUR_PATH_INSIDE_THE_BUCKET/repo1/
           repo1-retention-full: '7'
           repo1-retention-full-type: count
-        image: >-
-          docker.io/cybertecpostgresql/cybertec-pg-container:pgbackrest-rocky9-16-13-1
+        image: docker.io/cybertecpostgresql/cybertec-pg-container:pgbackrest-16.2-2-rc1
         repos:
           - endpoint: YOUR_S3_ENDPOINT
             name: repo1

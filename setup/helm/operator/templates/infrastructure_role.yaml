@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: Secret
-metadata:
-  name: cpo-monitoring-role
-  namespace: {{ .Values.operatorSettings.operator_namespace }}
-type: Opaque
-stringData:
-  user: postgres_exporter
-  password: password
