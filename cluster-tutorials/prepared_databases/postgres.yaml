@@ -3,21 +3,10 @@ kind: postgresql
 metadata:
   name: cluster-1
 spec:
-  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-16.2-2-rc1'
+  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-16.3-1-rc2'
   numberOfInstances: 1
   postgresql:
     version: '16'
-  preparedDatabases:
-    bar:
-      defaultUsers: true
-      extensions:
-        pg_partman: public
-        pgcrypto: public
-      schemas:
-        data: {}
-        history:
-          defaultRoles: true
-          defaultUsers: false
   resources:
     limits:
       cpu: 500m
@@ -29,3 +18,13 @@ spec:
   volume:
     size: 5Gi
     #storageClass: default-provisioner
+  preparedDatabases:
+    appl_db:
+      defaultUsers: true
+      extensions:
+        dblink: public
+      schemas:
+        data: {}
+        history:
+          defaultRoles: true
+          defaultUsers: false
