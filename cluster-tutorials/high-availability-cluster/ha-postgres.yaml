@@ -3,7 +3,7 @@ kind: postgresql
 metadata:
   name: ha-cluster-1
 spec:
-  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-16.2-2-rc1'
+  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-16.3-1-rc2'
   numberOfInstances: 2
   postgresql:
     version: '16'
@@ -12,8 +12,8 @@ spec:
       cpu: 500m
       memory: 500Mi
     requests:
-      cpu: 100m
-      memory: 100Mi
+      cpu: 500m
+      memory: 500Mi
   teamId: acid
   volume:
     size: 5Gi

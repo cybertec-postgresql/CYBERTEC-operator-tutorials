@@ -15,8 +15,8 @@ imagePullSecretNames: []
 
 # Define the operator settings to add to the configmap
 operatorSettings:
-  operatorImage: 'docker.io/cybertecpostgresql/cybertec-pg-operator:v0.7.0-2-rc1'
-  postgresImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-16.2-2-rc1'
+  operatorImage: 'docker.io/cybertecpostgresql/cybertec-pg-operator:v0.7.0-1-rc2'
+  postgresImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-16.3-1-rc2'
   watched_namespace: '*'
   enable_pod_antiaffinity: 'true'
   operator_namespace: 'cpo'
