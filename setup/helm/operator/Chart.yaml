@@ -4,5 +4,5 @@ name: postgres-operator
 description: Helm-Chart for setting up an instance of CYBERTEC's Postgres operator (CPO).
 
 appVersion: 0.7.0
-version: 0.7.0-rc1
+version: 0.7.0-rc2
 # Note: Make sure you have defined the correct version, based on the crd used
