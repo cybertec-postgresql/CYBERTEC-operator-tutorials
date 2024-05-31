@@ -37,4 +37,4 @@ spec:
         options:
           type: 'immediate'
           set: '20231215-111802F'
-        repo: '1'
+        repo: 'repo1'
