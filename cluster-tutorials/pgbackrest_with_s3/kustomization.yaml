@@ -1,7 +1,7 @@
 secretGenerator:
 - name: cluster-1-s3-credentials
   files:
-  - s3.configuration
+  - s3.conf
 
 generatorOptions:
   disableNameSuffixHash: true
