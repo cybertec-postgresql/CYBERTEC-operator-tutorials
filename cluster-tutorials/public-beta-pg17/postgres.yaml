@@ -1,7 +1,7 @@
 apiVersion: cpo.opensource.cybertec.at/v1
 kind: postgresql
 metadata:
-  name: cluster-1
+  name: beta-cluster-1
 spec:
   dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-17beta2-1'
   numberOfInstances: 1
