@@ -27,6 +27,8 @@ spec:
         memory: 100Mi
     schema: pooler
     user: pooler
+  enableConnectionPooler: true
+  enableReplicaConnectionPooler: true
   teamId: acid
   volume:
     size: 5Gi
