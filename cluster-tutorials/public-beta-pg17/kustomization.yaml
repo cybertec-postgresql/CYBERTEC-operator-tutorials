@@ -1,0 +1,10 @@
+secretGenerator:
+- name: cluster-1-pvc-configuration
+  files:
+  - pvc.configuration
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+resources:
+- postgres.yaml
