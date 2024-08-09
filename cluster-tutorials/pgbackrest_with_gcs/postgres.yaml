@@ -1,0 +1,35 @@
+apiVersion: cpo.opensource.cybertec.at/v1
+kind: postgresql
+metadata:
+  name: cluster-1
+spec:
+  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-16.3-1'
+  numberOfInstances: 1
+  postgresql:
+    version: '16'
+  resources:
+    limits:
+      cpu: 500m
+      memory: 500Mi
+    requests:
+      cpu: 500m
+      memory: 500Mi
+  teamId: acid
+  volume:
+    size: 5Gi
+  backup:
+    pgbackrest:
+      global:
+        repo1-gcs-key: /var/secrets/google/key.json
+        repo1-gcs-key-type: service
+        repo1-path: /YOUR_PATH_INSIDE_THE_BUCKET/repo1/
+        repo1-retention-full: '7'
+        repo1-retention-full-type: count
+      image: docker.io/cybertecpostgresql/cybertec-pg-container:pgbackrest-16.3-1
+      repos:
+        - endpoint: YOUR_GCS_ENDPOINT
+          name: repo1
+          resource: YOUR_BUCKET_NAME
+          schedule:
+            full: 30 2 * * *
+          storage: gcs
