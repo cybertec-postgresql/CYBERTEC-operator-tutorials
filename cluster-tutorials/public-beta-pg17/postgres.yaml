@@ -1,12 +1,14 @@
 apiVersion: cpo.opensource.cybertec.at/v1
 kind: postgresql
 metadata:
-  name: cluster-1
+  name: beta-cluster-1
 spec:
-  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-16.4-1'
+  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-17beta2-1'
   numberOfInstances: 1
   postgresql:
-    version: '16'
+    version: '17'
+    parameters:
+      shared_preload_libraries: 'pg_stat_statements'
   resources:
     limits:
       cpu: 500m
@@ -22,9 +24,9 @@ spec:
       configuration:
         secret: cluster-1-pvc-configuration
       global:
-        repo1-retention-full: '7'
+        repo1-retention-full: '3'
         repo1-retention-full-type: count
-      image: docker.io/cybertecpostgresql/cybertec-pg-container:pgbackrest-16.4-1'
+      image: docker.io/cybertecpostgresql/cybertec-pg-container:pgbackrest-17beta2-1'
       repos:
         - name: repo1
           schedule:
