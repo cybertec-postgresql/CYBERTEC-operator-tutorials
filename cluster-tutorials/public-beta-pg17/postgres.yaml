@@ -26,7 +26,7 @@ spec:
       global:
         repo1-retention-full: '3'
         repo1-retention-full-type: count
-      image: docker.io/cybertecpostgresql/cybertec-pg-container:pgbackrest-17beta2-1'
+      image: docker.io/cybertecpostgresql/cybertec-pg-container:pgbackrest-17beta3-1'
       repos:
         - name: repo1
           schedule:
