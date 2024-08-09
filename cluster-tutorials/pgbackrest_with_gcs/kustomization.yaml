@@ -1,0 +1,11 @@
+secretGenerator:
+- name: cluster-1-gcs-credentials
+  files:
+  - gcs.conf
+  - gcs.json
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+resources:
+- postgres.yaml

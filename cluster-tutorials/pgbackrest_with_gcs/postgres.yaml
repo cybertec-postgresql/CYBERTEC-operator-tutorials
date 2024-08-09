@@ -3,33 +3,34 @@ kind: postgresql
 metadata:
   name: cluster-1
 spec:
-  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-16.3-1'
+  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-16.4-1'
   numberOfInstances: 1
   postgresql:
-    version: '16'
+    version: '15'
   resources:
     limits:
-      cpu: 500m
+      cpu: 100m
       memory: 500Mi
     requests:
-      cpu: 500m
+      cpu: 100m
       memory: 500Mi
   teamId: acid
   volume:
     size: 5Gi
   backup:
     pgbackrest:
+      configuration:
+        secret: cluster-1-gcs-credentials
       global:
-        repo1-gcs-key: /var/secrets/google/key.json
-        repo1-gcs-key-type: service
         repo1-path: /YOUR_PATH_INSIDE_THE_BUCKET/repo1/
         repo1-retention-full: '7'
         repo1-retention-full-type: count
-      image: docker.io/cybertecpostgresql/cybertec-pg-container:pgbackrest-16.3-1
+      image: docker.io/cybertecpostgresql/cybertec-pg-container:pgbackrest-16.4-1'
       repos:
-        - endpoint: YOUR_GCS_ENDPOINT
-          name: repo1
-          resource: YOUR_BUCKET_NAME
+        - name: repo1
+          resource: cpo-bucket-1
+          key: gcs.json
+          keyType: service
           schedule:
             full: 30 2 * * *
           storage: gcs
