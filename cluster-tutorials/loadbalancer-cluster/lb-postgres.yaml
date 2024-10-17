@@ -3,7 +3,7 @@ kind: postgresql
 metadata:
   name: ha-cluster-1
 spec:
-  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-16.4-1'
+  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-17.0-2'
   numberOfInstances: 1
   postgresql:
     version: '16'
@@ -15,7 +15,7 @@ spec:
       cpu: 500m
       memory: 500Mi
   connectionPooler:
-    dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:pgbouncer-1.23-1'
+    dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:pgbouncer-1.23-2'
     mode: transaction
     numberOfInstances: 2
     resources:
