@@ -6,7 +6,7 @@ spec:
   dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-17.0-2'
   numberOfInstances: 2
   postgresql:
-    version: '16'
+    version: '17'
   resources:
     limits:
       cpu: 500m
