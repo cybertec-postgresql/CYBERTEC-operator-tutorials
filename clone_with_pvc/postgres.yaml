@@ -1,7 +1,7 @@
 apiVersion: cpo.opensource.cybertec.at/v1
 kind: postgresql
 metadata:
-  name: cluster-1
+  name: cluster-1-clone
 spec:
   dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-17.2-4'
   numberOfInstances: 1
@@ -32,9 +32,10 @@ spec:
           storage: pvc
           volume:
             size: 10Gi
-      restore:
-        id: '1'
-        options:
-          type: 'immediate'
-          set: '20231215-111802F'
-        repo: 'repo1'
+  clone:
+    cluster: cluster-1
+    pgbackrest:
+      configuration:
+        secret: cluster-1-pvc-configuration
+      repo:
+        storage: pvc

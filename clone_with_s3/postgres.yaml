@@ -1,7 +1,7 @@
 apiVersion: cpo.opensource.cybertec.at/v1
 kind: postgresql
 metadata:
-  name: cluster-1
+  name: cluster-1-clone
 spec:
   dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-17.2-4'
   numberOfInstances: 1
@@ -34,3 +34,16 @@ spec:
           schedule:
             full: 30 2 * * *
           storage: s3
+  clone:
+    cluster: cluster-1 # A random cluster name can be used if the source cluster is not present on the k8s.
+    pgbackrest:
+      configuration:
+        secret: cluster-1-s3-credentials
+      options:
+        repo1-path: /YOUR_PATH_INSIDE_THE_BUCKET_TO_THE_SOURCE_STANZA/repo1/
+      repo:
+        endpoint: YOUR_SOURCE_S3_ENDPOINT
+        name: repo1
+        region: YOUR_SOURCE_S3_REGION
+        resource: YOUR_SOURCE_BUCKET_NAME
+        storage: s3
