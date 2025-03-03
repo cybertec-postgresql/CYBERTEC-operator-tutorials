@@ -1,0 +1,15 @@
+apiVersion: v1
+entries:
+  postgres-operator:
+  - apiVersion: v2
+    appVersion: 0.8.2
+    created: "2025-03-03T07:48:58.886614284+01:00"
+    description: Helm-Chart for setting up an instance of CYBERTEC's Postgres operator
+      (CPO).
+    digest: c436063be5e5e85b2833293f3c3509cfa1f1acd40db2a123b68f66d000bda113
+    name: postgres-operator
+    type: application
+    urls:
+    - https://github.com/cybertec-postgresql/CYBERTEC-operator-tutorials/postgres-operator-0.8.2.tgz
+    version: 0.8.2
+generated: "2025-03-03T07:48:58.885843325+01:00"
