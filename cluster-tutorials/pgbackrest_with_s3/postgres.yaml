@@ -3,7 +3,7 @@ kind: postgresql
 metadata:
   name: cluster-1
 spec:
-  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-17.2-4'
+  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-17.4-1'
   numberOfInstances: 1
   postgresql:
     version: '17'
@@ -25,7 +25,7 @@ spec:
         repo1-path: /YOUR_PATH_INSIDE_THE_BUCKET/repo1/
         repo1-retention-full: '7'
         repo1-retention-full-type: count
-      image: 'docker.io/cybertecpostgresql/cybertec-pg-container:pgbackrest-17.2-4'
+      image: 'docker.io/cybertecpostgresql/cybertec-pg-container:pgbackrest-17.4-1'
       repos:
         - endpoint: YOUR_S3_ENDPOINT
           name: repo1
