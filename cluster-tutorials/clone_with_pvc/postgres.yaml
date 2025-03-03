@@ -3,7 +3,7 @@ kind: postgresql
 metadata:
   name: cluster-1-clone
 spec:
-  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-17.2-4'
+  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-17.4-1'
   numberOfInstances: 1
   postgresql:
     version: '17'
@@ -24,7 +24,7 @@ spec:
       global:
         repo1-retention-full: '7'
         repo1-retention-full-type: count
-      image: 'docker.io/cybertecpostgresql/cybertec-pg-container:pgbackrest-17.2-4'
+      image: 'docker.io/cybertecpostgresql/cybertec-pg-container:pgbackrest-17.4-1'
       repos:
         - name: repo1
           schedule:
