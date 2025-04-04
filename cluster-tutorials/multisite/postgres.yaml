@@ -1,0 +1,29 @@
+apiVersion: cpo.opensource.cybertec.at/v1
+kind: postgresql
+metadata:
+  name: multisite-cluster
+  namespace: cpo
+  labels:
+    app.kubernetes.io/name: postgres-cluster
+    app.kubernetes.io/instance: multisite-cluster 
+spec:
+  dockerImage: docker.io/cybertecpostgresql/cybertec-pg-container:postgres-multisite-17.4-1
+  numberOfInstances: 1
+  postgresql:
+    version: '17'
+  resources:
+    limits:
+      cpu: 500m
+      memory: 500Mi
+    requests:
+      cpu: 500m
+      memory: 500Mi
+  teamId: acid
+  volume:
+    size: 5Gi
+  patroni:
+    ttl: 30
+    loop_wait: 10
+    retry_timeout: 10
+    multisite:
+      enable: true
