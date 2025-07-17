@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/name: postgres-cluster
     app.kubernetes.io/instance: multisite-cluster 
 spec:
-  dockerImage: docker.io/cybertecpostgresql/cybertec-pg-container:postgres-17.4-3'
+  dockerImage: docker.io/cybertecpostgresql/cybertec-pg-container:postgres-17.5-1'
   numberOfInstances: 1
   postgresql:
     version: '17'
