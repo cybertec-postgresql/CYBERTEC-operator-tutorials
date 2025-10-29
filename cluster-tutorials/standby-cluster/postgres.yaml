@@ -6,7 +6,7 @@ spec:
   standby:
     standby_host: "cluster-1.cpo"
     standby_port: "5432"
-  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-17.6-1'
+  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-18.0-1'
   numberOfInstances: 1
   postgresql:
     version: '17'
