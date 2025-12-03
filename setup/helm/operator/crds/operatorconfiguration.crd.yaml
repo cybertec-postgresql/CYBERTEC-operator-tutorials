@@ -215,6 +215,9 @@ spec:
                   enable_readiness_probe:
                     type: boolean
                     default: false
+                  enable_liveness_probe:
+                    type: boolean
+                    default: false
                   enable_sidecars:
                     type: boolean
                     default: true
@@ -318,6 +321,9 @@ spec:
                   spilo_allow_privilege_escalation:
                     type: boolean
                     default: true
+                  container_readonly_root_filesystem:
+                    type: boolean
+                    default: false
                   spilo_runasuser:
                     type: integer
                   spilo_runasgroup:
