@@ -3,10 +3,10 @@ kind: postgresql
 metadata:
   name: cluster-1
 spec:
-  dockerImage: 'docker.io/cybertecpostgresql/cybertec-pg-container:postgres-18.0-1'
+  dockerImage: 'containers.cybertec.at/cybertec-pg-container/postgres:rocky9-18.1-1'
   numberOfInstances: 1
   postgresql:
-    version: '17'
+    version: '18'
   resources:
     limits:
       cpu: 100m
@@ -25,7 +25,7 @@ spec:
         repo1-path: /YOUR_PATH_INSIDE_THE_BUCKET/repo1/
         repo1-retention-full: '7'
         repo1-retention-full-type: count
-      image: 'docker.io/cybertecpostgresql/cybertec-pg-container:pgbackrest-18.0-1'
+      image: 'containers.cybertec.at/cybertec-pg-container/pgbackrest:rocky9-18.1-1'
       repos:
         - name: repo1
           resource: cpo-bucket-1

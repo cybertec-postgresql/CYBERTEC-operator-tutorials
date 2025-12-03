@@ -25,7 +25,7 @@ configuration:
   #      - name: DATA_SOURCE_NAME
   #        value: >-
   #          postgresql://postgres_exporter:password@localhost:5432/postgres?sslmode=disable
-  #    image: 'docker.io/cybertecpostgresql/cybertec-pg-container:exporter-17.6-1'
+  #    image: 'containers.cybertec.at/cybertec-pg-container/exporter:rocky9-18.1-1'
   #    name: postgres-exporter
   #    ports:
   #      - containerPort: 9187
