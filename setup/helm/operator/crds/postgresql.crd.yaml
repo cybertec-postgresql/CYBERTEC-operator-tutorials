@@ -472,6 +472,8 @@ spec:
                       etcd:
                         type: object
                         properties:
+                          certSecretName:
+                            type: string
                           hosts:
                             type: string
                           user:

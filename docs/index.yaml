@@ -3,10 +3,10 @@ entries:
   postgres-operator:
   - apiVersion: v2
     appVersion: 0.9.0
-    created: "2025-12-03T18:55:29.196695311+01:00"
+    created: "2025-12-03T19:52:48.441697621+01:00"
     description: Helm-Chart for setting up an instance of CYBERTEC's Postgres operator
       (CPO).
-    digest: 63c94671d0f6219b32c0cfddf5ebaa7189bb719bda06fafc340418b633da220b
+    digest: 0f4b04aafe7c4bea40082510fb15e712b0f5438653c20f0d811436f8b7e6c1a9
     name: postgres-operator
     type: application
     urls:
@@ -14,7 +14,7 @@ entries:
     version: 0.9.0
   - apiVersion: v2
     appVersion: 0.8.3
-    created: "2025-12-03T18:55:29.196218774+01:00"
+    created: "2025-12-03T19:52:48.44126257+01:00"
     description: Helm-Chart for setting up an instance of CYBERTEC's Postgres operator
       (CPO).
     digest: c63960331058590711189c1a4487aca03c1ba0cec9e162e485b8646fce5d5392
@@ -25,7 +25,7 @@ entries:
     version: 0.8.3
   - apiVersion: v2
     appVersion: 0.8.2
-    created: "2025-12-03T18:55:29.19558977+01:00"
+    created: "2025-12-03T19:52:48.440869914+01:00"
     description: Helm-Chart for setting up an instance of CYBERTEC's Postgres operator
       (CPO).
     digest: 403e5e1156250f663064db02ccf09e74be0dccc025556a02e502e349222c1a92
@@ -34,4 +34,4 @@ entries:
     urls:
     - https://cybertec-postgresql.github.io/CYBERTEC-operator-tutorials/postgres-operator-0.8.2.tgz
     version: 0.8.2
-generated: "2025-12-03T18:55:29.186327573+01:00"
+generated: "2025-12-03T19:52:48.440329121+01:00"
