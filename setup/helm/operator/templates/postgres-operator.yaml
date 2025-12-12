@@ -18,6 +18,10 @@ spec:
         cpo.cybertec.at/pod-type: postgres-operator
     spec:
       serviceAccountName: cpo-operator
+      {{- with .Values.imagePullSecretNames }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       containers:
       - name: postgres-operator
         image: {{ .Values.operatorSettings.operatorImage }}
