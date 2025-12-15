@@ -657,11 +657,19 @@ spec:
                   type: object
                 type: array
               tde:
+                type: object
                 nullable: true
                 properties:
                   enable:
                     type: boolean
-                type: object
+                  keybits: 
+                    type: integer
+                    format: int32
+                    default: 128
+                    enum:
+                      - 128
+                      - 192
+                      - 256
               teamId:
                 type: string
               tls:
