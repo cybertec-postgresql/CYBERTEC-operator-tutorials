@@ -3,7 +3,7 @@ kind: postgresql
 metadata:
   name: ha-cluster-1
 spec:
-  dockerImage: 'containers.cybertec.at/cybertec-pg-container/postgres:rocky9-18.1-1'
+  dockerImage: 'containers.cybertec.at/cybertec-pg-container/postgres:rocky9-18.1-2'
   numberOfInstances: 1
   postgresql:
     version: '18'
@@ -15,7 +15,7 @@ spec:
       cpu: 500m
       memory: 500Mi
   connectionPooler:
-    dockerImage: 'containers.cybertec.at/cybertec-pg-container/pgbouncer:rocky9-1.25.0-1'
+    dockerImage: 'containers.cybertec.at/cybertec-pg-container/pgbouncer:rocky9-1.25.0-2'
     mode: transaction
     numberOfInstances: 2
     resources:
