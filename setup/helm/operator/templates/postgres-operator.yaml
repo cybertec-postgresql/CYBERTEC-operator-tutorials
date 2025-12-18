@@ -48,3 +48,7 @@ spec:
         # Define an ID to isolate controllers from each other
         # - name: CONTROLLER_ID
         #   value: "second-operator"
+        {{- if .Values.operatorSettings.enableJsonLogging }}
+        - name: ENABLE_JSON_LOGGING
+          value: "true"
+        {{- end }}

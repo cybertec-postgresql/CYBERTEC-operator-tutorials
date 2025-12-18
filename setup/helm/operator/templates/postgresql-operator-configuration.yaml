@@ -4,7 +4,7 @@ metadata:
   name: postgresql-operator-configuration
 configuration:
   docker_image: {{ .Values.operatorSettings.postgresImage }}
-  # enable_crd_registration: true
+  enable_crd_registration: {{ .Values.operatorSettings.enable_crd_registration }}
   # crd_categories:
   # - all
   # enable_lazy_spilo_upgrade: false
@@ -65,9 +65,10 @@ configuration:
     # - downscaler/*
     # enable_cross_namespace_secret: "false"
     enable_init_containers: true
-    enable_pod_antiaffinity: {{ .Values.operatorSettings.enable_pod_antiaffinity }}
-    enable_pod_disruption_budget: true
-    enable_readiness_probe: true
+    enable_pod_antiaffinity: {{ .Values.configKubernetes.enable_pod_antiaffinity }}
+    enable_pod_disruption_budget: {{ .Values.configKubernetes.enable_pod_disruption_budget }}
+    enable_readiness_probe: {{ .Values.configKubernetes.enable_readiness_probe }}
+    enable_liveness_probe: {{ .Values.configKubernetes.enable_liveness_probe }}
     enable_sidecars: true
     # ignored_annotations:
     # - k8s.v1.cni.cncf.io/network-status
@@ -110,19 +111,20 @@ configuration:
       '
   {{- end }}
     # pod_service_account_role_binding_definition: ""
-    pod_terminate_grace_period: 5m
+    pod_terminate_grace_period: {{ .Values.configKubernetes.pod_terminate_grace_period }}
     secret_name_template: "{username}.{cluster}.credentials.{tprkind}.{tprgroup}"
-    spilo_allow_privilege_escalation: false
+    spilo_allow_privilege_escalation: {{ .Values.securityContext.allow_privilege_escalation }}
+    container_readonly_root_filesystem: {{ .Values.securityContext.readonly_root_filesystem }}
     # spilo_runasuser: 101
     # spilo_runasgroup: 103
     # spilo_fsgroup: 103
-    spilo_privileged: false
+    spilo_privileged: {{ .Values.securityContext.privileged }}
     storage_resize_mode: pvc
     # toleration:
     #   key: db-only
     #   operator: Exists
     #   effect: NoSchedule
-    watched_namespace: "*"
+    watched_namespace: {{ .Values.operatorSettings.watched_namespace }}
   postgres_pod_resources:
     default_cpu_limit: "1"
     default_cpu_request: 100m
@@ -146,13 +148,13 @@ configuration:
     #   keyx: valuex
     #   keyy: valuey
     # db_hosted_zone: ""
-    enable_master_load_balancer: false
-    enable_master_pooler_load_balancer: false
-    enable_replica_load_balancer: false
-    enable_replica_pooler_load_balancer: false
-    external_traffic_policy: "Cluster"
-    master_dns_name_format: "{cluster}.{namespace}.{hostedzone}"
-    replica_dns_name_format: "{cluster}-repl.{namespace}.{hostedzone}"
+    enable_master_load_balancer: {{ .Values.configLoadBalancer.enable_master_load_balancer }}
+    enable_master_pooler_load_balancer: {{ .Values.configLoadBalancer.enable_master_pooler_load_balancer }}
+    enable_replica_load_balancer: {{ .Values.configLoadBalancer.enable_replica_load_balancer }}
+    enable_replica_pooler_load_balancer: {{ .Values.configLoadBalancer.enable_replica_pooler_load_balancer }}
+    external_traffic_policy: {{ .Values.configLoadBalancer.external_traffic_policy }}
+    master_dns_name_format: {{ .Values.configLoadBalancer.master_dns_name_format }}
+    replica_dns_name_format: {{ .Values.configLoadBalancer.replica_dns_name_format }}
   aws_or_gcp:
     # additional_secret_mount: "some-secret-name"
     # additional_secret_mount_path: "/some/dir"
@@ -179,7 +181,7 @@ configuration:
     # logical_backup_s3_retention_time: ""
     logical_backup_schedule: "30 00 * * *"
   debug:
-    debug_logging: true
+    debug_logging: {{ .Values.operatorSettings.debug }}
     enable_database_access: true
   teams_api:
     enable_admin_role_for_users: false

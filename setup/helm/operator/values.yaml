@@ -1,13 +1,5 @@
 ---
 
-# singleNamespace controls where CPO watches for PostgresClusters. When false,
-# CPO watches for and responds to PostgresClusters in all namespaces. When true,
-# CPO watches only the namespace in which it is installed.
-singleNamespace: false
-
-# debug allows you to enable or disable the "debug" level of logging.
-debug: true
-
 # imagePullSecretNames is a list of secret names to use for pulling controller images.
 # More info: https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
 imagePullSecretNames: []
@@ -18,7 +10,28 @@ operatorSettings:
   operatorImage: 'docker.io/cybertecpostgresql/cybertec-pg-operator:v0.9.0-1'
   postgresImage: 'containers.cybertec.at/cybertec-pg-container/postgres:rocky9-18.1-2'
   poolerImage: 'containers.cybertec.at/cybertec-pg-container/pgbouncer:rocky9-1.25.0-2'
-  watched_namespace: '*'
+  watched_namespace: '*'            # Defines whether cpo monitors all namespaces (“*”) or a specific one (for example, “cpo”).
+  enable_crd_registration: 'true'   # the deployment should create/update the CRDs
+  debug: 'true'                     # debug allows you to enable or disable the "debug" level of logging.
+  enableJsonLogging: false
+  
+securityContext:
+  readonly_root_filesystem: 'true'
+  allow_privilege_escalation: 'false'
+  privileged: 'false'
+
+configKubernetes:
   enable_pod_antiaffinity: 'true'
+  enable_pod_disruption_budget: 'true'
+  enable_readiness_probe: 'true'
+  enable_liveness_probe: 'true'
+  pod_terminate_grace_period: '5m'
 
-
+configLoadBalancer:
+  enable_master_load_balancer: 'false'
+  enable_master_pooler_load_balancer: 'false'
+  enable_replica_load_balancer: 'false'
+  enable_replica_pooler_load_balancer: 'false'
+  external_traffic_policy: "Cluster"
+  master_dns_name_format: "{cluster}.{namespace}.{hostedzone}"
+  replica_dns_name_format: "{cluster}-repl.{namespace}.{hostedzone}"
