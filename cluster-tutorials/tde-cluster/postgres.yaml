@@ -1,9 +1,9 @@
 apiVersion: cpo.opensource.cybertec.at/v1
 kind: postgresql
 metadata:
-  name: cluster-1
+  name: tde-cluster-1
 spec:
-  dockerImage: 'containers.cybertec.at/cybertec-pg-container/postgres:rocky9-18.1-2'
+  dockerImage: 'containers.cybertec.at/cybertec-pgee-container/postgres:rocky9-18.1-2'
   numberOfInstances: 1
   postgresql:
     version: '18'
@@ -15,8 +15,9 @@ spec:
       cpu: 500m
       memory: 500Mi
   teamId: acid
+  tde:
+    enable: true
+    keybits: 256
   volume:
     size: 5Gi
     #storageClass: default-provisioner
-  monitor:
-    image: 'containers.cybertec.at/cybertec-pg-container/exporter:rocky9-18.1-2'
