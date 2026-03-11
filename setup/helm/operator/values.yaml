@@ -8,8 +8,8 @@ imagePullSecretNames: []
 # Define the operator settings to add to the configmap
 operatorSettings:
   operatorImage: 'docker.io/cybertecpostgresql/cybertec-pg-operator:v0.9.1-1'
-  postgresImage: 'containers.cybertec.at/cybertec-pg-container/postgres:rocky9-18.1-2'
-  poolerImage: 'containers.cybertec.at/cybertec-pg-container/pgbouncer:rocky9-1.25.0-2'
+  postgresImage: 'containers.cybertec.at/cybertec-pg-container/postgres:rocky9-18.3-1'
+  poolerImage: 'containers.cybertec.at/cybertec-pg-container/pgbouncer:rocky9-1.25-1'
   watched_namespace: '*'            # Defines whether cpo monitors all namespaces (“*”) or a specific one (for example, “cpo”).
   enable_crd_registration: 'true'   # the deployment should create/update the CRDs
   debug: 'true'                     # debug allows you to enable or disable the "debug" level of logging.
