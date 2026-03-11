@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards
+  labels:
+    app.kubernetes.io/name: postgres-operator-monitoring
+    vendor: opensource.cybertec
+    grafana_dashboard: "1"
+data:
+{{- range $path, $_ := .Files.Glob "dashboards/*.json" }}
+  {{- $filename := base $path }}
+  {{ $filename }}: |-
+{{ $.Files.Get $path | indent 4 }}
+{{- end }}

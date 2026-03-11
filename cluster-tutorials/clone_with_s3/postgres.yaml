@@ -3,7 +3,7 @@ kind: postgresql
 metadata:
   name: cluster-1-clone
 spec:
-  dockerImage: 'containers.cybertec.at/cybertec-pg-container/postgres:rocky9-18.1-2'
+  dockerImage: 'containers.cybertec.at/cybertec-pg-container/postgres:rocky9-18.3-1'
   numberOfInstances: 1
   postgresql:
     version: '18'
@@ -26,7 +26,7 @@ spec:
         repo1-retention-full: '7'
         repo1-retention-full-type: count
         #repo1-s3-uri-style: path # If you need path-style for your s3-storage 
-      image: 'containers.cybertec.at/cybertec-pg-container/pgbackrest:rocky9-18.1-2'
+      image: 'containers.cybertec.at/cybertec-pg-container/pgbackrest:rocky9-18.3-1'
       repos:
         - endpoint: YOUR_S3_ENDPOINT
           name: repo1

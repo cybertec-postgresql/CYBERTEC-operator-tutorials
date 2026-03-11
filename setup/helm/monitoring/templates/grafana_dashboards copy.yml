@@ -1,0 +1,12 @@
+# Base-Element for the Grafana-Dashboards. It contains informations about the Organization
+# This file is part of the CPO monitoring stack from CYBERTEC PostgreSQL International GmbH.
+apiVersion: 1
+providers:
+- name: 'cpo_dashboards'
+  orgId: 1
+  folder: ''
+  type: file
+  disableDeletion: false
+  updateIntervalSeconds: 5
+  options:
+    path: $GF_PATHS_PROVISIONING/dashboards

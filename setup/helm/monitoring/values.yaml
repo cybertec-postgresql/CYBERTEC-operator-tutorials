@@ -1,0 +1,10 @@
+---
+
+prometheus:
+  enable_alerting: true
+
+alertmanager:
+  deploy: true
+
+grafana:
+  deploy: true

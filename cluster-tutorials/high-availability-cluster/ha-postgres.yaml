@@ -3,7 +3,7 @@ kind: postgresql
 metadata:
   name: ha-cluster-1
 spec:
-  dockerImage: 'containers.cybertec.at/cybertec-pg-container/postgres:rocky9-18.1-2'
+  dockerImage: 'containers.cybertec.at/cybertec-pg-container/postgres:rocky9-18.3-1'
   numberOfInstances: 2
   postgresql:
     version: '18'

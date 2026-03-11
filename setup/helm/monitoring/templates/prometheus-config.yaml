@@ -1,0 +1,80 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/name: postgres-operator-monitoring
+    vendor: opensource.cybertec
+  name: cpo-prometheus-cm
+data:
+  prometheus.yml: |+
+    ---
+    global:
+      scrape_interval: 15s
+      scrape_timeout: 15s
+      evaluation_interval: 5s
+
+    scrape_configs:
+    - job_name: 'postgres-exporter'
+      kubernetes_sd_configs:
+      - role: pod
+
+      relabel_configs:
+      - source_labels: [__meta_kubernetes_pod_label_cpo_monitoring_stack]
+        action: keep
+        regex: true
+        separator: ""
+      # Block some Ports
+      - source_labels: [__meta_kubernetes_pod_container_port_number]
+        action: drop
+        regex: ^$
+      - source_labels: [__meta_kubernetes_pod_container_port_number]
+        action: drop
+        regex: 5432
+      - source_labels: [__meta_kubernetes_pod_container_port_number]
+        action: drop
+        regex: 8008
+      - source_labels: [__meta_kubernetes_pod_container_port_number]
+        action: drop
+        regex: 8080
+      # Fetch some Labels
+      - source_labels: [__meta_kubernetes_pod_name]
+        target_label: pod
+      - source_labels: [__meta_kubernetes_pod_label_cluster_cpo_opensource_cybertec_at_name]
+        target_label: clustername
+        separator: ""
+        replacement: '$1'
+      - source_labels: [__meta_kubernetes_namespace,clustername]
+        target_label: clusterid
+        separator: ":"
+        replacement: '$1$2'
+      - source_labels: [__meta_kubernetes_pod_ip]
+        target_label: ip
+        replacement: '$1'
+      - source_labels: [__meta_kubernetes_pod_label_deployment_name]
+        target_label: deployment
+        replacement: '$1'
+        separator: ""
+      - source_labels: [__meta_kubernetes_pod_label_member_cpo_opensource_cybertec_at_role]
+        target_label: role
+        replacement: '$1'
+        separator: ""
+      - source_labels: [dbname]
+        target_label: dbname
+        replacement: '$1'
+      - source_labels: [schemaname]
+        target_label: schemaname
+        replacement: '$1'
+      - source_labels: [tablename]
+        target_label: tablename
+        replacement: '$1'
+
+
+    rule_files:
+      - /etc/prometheus/alert-rules.d/*.yml
+    alerting:
+      alertmanagers:
+      - scheme: http
+        static_configs:
+        - targets:
+          - "cpo-monitoring-alertmanager:9093"
+

@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: cpo-monitoring
+    vendor: opensource.cybertec
+    postgres-operator.cybertec.at/stack: cpo-monitoring
+  name: cpo-monitoring-prometheus
+spec:
+  selector:
+    matchLabels:
+      postgres-operator.cybertec.at/stack: cpo-monitoring
+      name: cpo-monitoring-prometheus
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        postgres-operator.cybertec.at/stack: cpo-monitoring
+        name: cpo-monitoring-prometheus
+    spec:
+      containers:
+      - image: prom/prometheus:v2.41.0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /-/healthy
+            port: 9090
+            scheme: HTTP
+          initialDelaySeconds: 15
+          periodSeconds: 20
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: cpo-prometheus
+        ports:
+        - containerPort: 9090
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /-/ready
+            port: 9090
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/prometheus
+          name: prometheus-cm
+        - mountPath: /prometheus
+          name: prometheus-volume
+        - mountPath: /etc/prometheus/alert-rules.d
+          name: alertmanagerrules
+      securityContext: {}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      serviceAccount: cpo-monitoring-tools
+      serviceAccountName: cpo-monitoring-tools
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: cpo-prometheus-cm
+        name: prometheus-cm
+      - name: prometheus-volume
+        persistentVolumeClaim:
+          claimName: prometheus-pvc
+      - configMap:
+          defaultMode: 420
+          name: alertmanager-rules-config
+        name: alertmanagerrules
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate

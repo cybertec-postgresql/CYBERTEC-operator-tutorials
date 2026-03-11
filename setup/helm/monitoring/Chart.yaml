@@ -1,0 +1,15 @@
+apiVersion: v2
+name: postgres-operator
+version: 0.9.1
+appVersion: 0.9.1
+home: https://github.com/cybertec-postgresql/cybertec-pg-operator
+description: Postgres Operator creates and manages PostgreSQL clusters running in Kubernetes
+keywords:
+- postgres
+- operator
+- cloud-native
+- patroni
+maintainers:
+- name: CYBERTEC PostgreSQL International GmbH
+sources:
+- https://github.com/cybertec-postgresql/cybertec-pg-operator
