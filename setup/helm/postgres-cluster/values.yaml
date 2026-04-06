@@ -12,7 +12,7 @@
 #  my-annotation: value
 
 cluster:
-  dockerImage: containers.cybertec.at/cybertec-pg-container/postgres:rocky9-18.3-1
+  dockerImage: containers.cybertec.at/cybertec-pg-container/postgres:rocky9-18.3-2
   numberOfInstances: 2
 
   postgresql:
@@ -103,7 +103,7 @@ cluster:
 
   #backup:
   #  pgbackrest:
-  #    image: "containers.cybertec.at/cybertec-pg-container/pgbackrest:rocky9-18.3-1"
+  #    image: "containers.cybertec.at/cybertec-pg-container/pgbackrest:rocky9-18.3-2"
   #    configuration:
   #      secret: "xyz"
   #      protection:
@@ -132,7 +132,7 @@ cluster:
   #        target-time: "2023-01-02 03:04:05+06"
 
   monitor:
-    image: 'containers.cybertec.at/cybertec-pg-container/exporter:rocky9-18.3-1'
+    image: 'containers.cybertec.at/cybertec-pg-container/exporter:rocky9-18.3-2'
 
   #users:  # Application/Robot users
   #  appadmin:
@@ -188,7 +188,7 @@ cluster:
   #  cluster: name-of-cluster-to-clone
 
   #connectionPooler:
-  #  dockerImage: containers.cybertec.at/cybertec-pg-container/pgbouncer:rocky9-1.25-1
+  #  dockerImage: containers.cybertec.at/cybertec-pg-container/pgbouncer:rocky9-1.25-2
   #  numberOfInstances: 2
   #  mode: transaction # session/transaction mode pooling
   #  schema: "pooler"
