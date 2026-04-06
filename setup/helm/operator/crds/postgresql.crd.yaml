@@ -209,6 +209,17 @@ spec:
                     type: string
                   user:
                     type: string
+                  env:
+                    type: array
+                    nullable: true
+                    items:
+                      type: object
+                      x-kubernetes-preserve-unknown-fields: true
+                  labels:
+                    type: object
+                    nullable: true
+                    additionalProperties:
+                      type: string
               databases:
                 type: object
                 additionalProperties:
@@ -238,6 +249,11 @@ spec:
                 items:
                   type: object
                   x-kubernetes-preserve-unknown-fields: true
+              labels:
+                type: object
+                nullable: true
+                additionalProperties:
+                  type: string
               init_containers:
                 type: array
                 description: deprecated
@@ -383,6 +399,12 @@ spec:
                 properties:
                   image:
                     type: string
+                  env:
+                    type: array
+                    nullable: true
+                    items:
+                      type: object
+                      x-kubernetes-preserve-unknown-fields: true
                 type: object
               nodeAffinity:
                 type: object
@@ -560,6 +582,17 @@ spec:
                       - "18"
                   parameters:
                     type: object
+                    additionalProperties:
+                      type: string
+                  env:
+                    type: array
+                    nullable: true
+                    items:
+                      type: object
+                      x-kubernetes-preserve-unknown-fields: true
+                  labels:
+                    type: object
+                    nullable: true
                     additionalProperties:
                       type: string
               preparedDatabases:
@@ -985,6 +1018,17 @@ spec:
                             pattern: ^repo[1-4]$
                             type: string
                         type: object
+                      env:
+                        type: array
+                        nullable: true
+                        items:
+                          type: object
+                          x-kubernetes-preserve-unknown-fields: true
+                      labels:
+                        type: object
+                        nullable: true
+                        additionalProperties:
+                          type: string
                     required:
                     - image
                     - repos

@@ -3,7 +3,7 @@ kind: postgresql
 metadata:
   name: cluster-pvc-1
 spec:
-  dockerImage: 'containers.cybertec.at/cybertec-pg-container/postgres:rocky9-18.3-1'
+  dockerImage: 'containers.cybertec.at/cybertec-pg-container/postgres:rocky9-18.3-2'
   numberOfInstances: 1
   postgresql:
     version: '18'
@@ -24,7 +24,7 @@ spec:
       global:
         repo1-retention-full: '7'
         repo1-retention-full-type: count
-      image: 'containers.cybertec.at/cybertec-pg-container/pgbackrest:rocky9-18.3-1'
+      image: 'containers.cybertec.at/cybertec-pg-container/pgbackrest:rocky9-18.3-2'
       repos:
         - name: repo1
           schedule:
