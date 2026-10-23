@@ -3,7 +3,7 @@ kind: postgresql
 metadata:
   name: ha-cluster-1
 spec:
-  dockerImage: 'containers.cybertec.at/cybertec-pg-container/postgres:rocky9-18.6-1'
+  dockerImage: 'containers.cybertec.at/cybertec-pg-container/postgres:rocky9-18.6-3'
   numberOfInstances: 1
   postgresql:
     version: '18'
@@ -15,7 +15,7 @@ spec:
       cpu: 500m
       memory: 500Mi
   connectionPooler:
-    dockerImage: 'containers.cybertec.at/cybertec-pg-container/pgbouncer:rocky9-1.25-3'
+    dockerImage: 'containers.cybertec.at/cybertec-pg-container/pgbouncer:rocky9-1.26.1-3'
     mode: transaction
     numberOfInstances: 2
     resources:
@@ -29,6 +29,8 @@ spec:
     user: pooler
   enableConnectionPooler: true
   enableReplicaConnectionPooler: true
+  enableMasterPoolerLoadBalancer: true
+  enableReplicaLoadBalancer: true
   teamId: acid
   volume:
     size: 5Gi
