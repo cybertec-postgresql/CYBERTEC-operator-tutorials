@@ -2,12 +2,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   name: postgresqls.cpo.opensource.cybertec.at
-  labels:
-    app.kubernetes.io/name: cpo
-    app.kubernetes.io/version: 0.9.1
 spec:
-  conversion:
-    strategy: None
   group: cpo.opensource.cybertec.at
   names:
     kind: postgresql
@@ -175,15 +170,22 @@ spec:
                   dockerImage:
                     type: string
                   maxDBConnections:
+                    description: "Deprecated: use parameters.max_db_connections instead (per pod, not divided by numberOfInstances)."
                     type: integer
                   mode:
+                    description: "Deprecated: use parameters.pool_mode instead."
                     type: string
                     enum:
                       - "session"
                       - "transaction"
+                      - "statement"
                   numberOfInstances:
                     type: integer
                     minimum: 1
+                  parameters:
+                    type: object
+                    additionalProperties:
+                      type: string
                   resources:
                     type: object
                     properties:
@@ -209,17 +211,6 @@ spec:
                     type: string
                   user:
                     type: string
-                  env:
-                    type: array
-                    nullable: true
-                    items:
-                      type: object
-                      x-kubernetes-preserve-unknown-fields: true
-                  labels:
-                    type: object
-                    nullable: true
-                    additionalProperties:
-                      type: string
               databases:
                 type: object
                 additionalProperties:
@@ -249,11 +240,6 @@ spec:
                 items:
                   type: object
                   x-kubernetes-preserve-unknown-fields: true
-              labels:
-                type: object
-                nullable: true
-                additionalProperties:
-                  type: string
               init_containers:
                 type: array
                 description: deprecated
@@ -394,18 +380,6 @@ spec:
                 type: object
                 additionalProperties:
                   type: string
-              monitor:
-                nullable: true
-                properties:
-                  image:
-                    type: string
-                  env:
-                    type: array
-                    nullable: true
-                    items:
-                      type: object
-                      x-kubernetes-preserve-unknown-fields: true
-                type: object
               nodeAffinity:
                 type: object
                 properties:
@@ -584,17 +558,6 @@ spec:
                     type: object
                     additionalProperties:
                       type: string
-                  env:
-                    type: array
-                    nullable: true
-                    items:
-                      type: object
-                      x-kubernetes-preserve-unknown-fields: true
-                  labels:
-                    type: object
-                    nullable: true
-                    additionalProperties:
-                      type: string
               preparedDatabases:
                 type: object
                 additionalProperties:
@@ -682,6 +645,18 @@ spec:
                 type: integer
               spiloFSGroup:
                 type: integer
+              seccompProfile:
+                type: object
+                description: "The seccomp options to use by the containers in this pod."
+                required:
+                  - type
+                properties:
+                  type:
+                    type: string
+                    description: "Valid options are: Localhost, RuntimeDefault, Unconfined."
+                  localhostProfile:
+                    type: string
+                    description: "Must be set if type is Localhost. Must NOT be set for any other type."
               standby:
                 type: object
                 properties:
@@ -737,7 +712,6 @@ spec:
                           recoveryEventType:
                             type: string
               tde:
-                type: object
                 nullable: true
                 properties:
                   enable:
@@ -750,6 +724,7 @@ spec:
                       - 128
                       - 192
                       - 256
+                type: object
               teamId:
                 type: string
               tls:
@@ -883,157 +858,145 @@ spec:
                   throughput:
                     type: integer
               backup:
+                type: object
                 properties:
                   pgbackrest:
+                    type: object
                     properties:
+                      image:
+                        type: string
                       configuration:
+                        type: object
                         properties:
+                          secret:
+                            type: string
                           protection:
+                            type: object
                             properties:
                               restore:
                                 type: boolean
-                            type: object
-                          secret:
-                            type: string
-                        type: object
                       global:
+                        type: object
                         additionalProperties:
                           type: string
-                        type: object
-                      image:
-                        type: string
                       repos:
+                        type: array
                         items:
                           properties:
-                            endpoint:
-                              type: string
                             name:
-                              pattern: ^repo[1-4]$
                               type: string
-                            pvcsize:
+                              pattern: ^repo[1-4]$
+                            storage:
+                              type: string
+                              enum:
+                                - "s3"
+                                - "gcs"
+                                - "azure"
+                                - "pvc"
+                            resource:
+                              type: string
+                            endpoint:
                               type: string
                             region:
                               type: string
-                            resource:
-                              type: string
                             schedule:
+                              type: object
                               properties:
-                                diff:
-                                  type: string
                                 full:
                                   type: string
                                 incr:
                                   type: string
-                              type: object
-                            storage:
-                              enum:
-                              - s3
-                              - gcs
-                              - azure
-                              - pvc
-                              type: string
+                                diff:
+                                  type: string
                             volume:
+                              type: object
+                              required:
+                                - "size"
                               properties:
                                 iops:
                                   type: integer
                                 selector:
+                                  type: object
                                   properties:
                                     matchExpressions:
+                                      type: array
                                       items:
+                                        type: object
+                                        required:
+                                          - key
+                                          - operator
                                         properties:
                                           key:
                                             type: string
                                           operator:
-                                            enum:
-                                            - DoesNotExist
-                                            - Exists
-                                            - In
-                                            - NotIn
                                             type: string
+                                            enum:
+                                              - DoesNotExist
+                                              - Exists
+                                              - In
+                                              - NotIn
                                           values:
+                                            type: array
                                             items:
                                               type: string
-                                            type: array
-                                        required:
-                                        - key
-                                        - operator
-                                        type: object
-                                      type: array
                                     matchLabels:
                                       type: object
                                       x-kubernetes-preserve-unknown-fields: true
-                                  type: object
                                 size:
-                                  pattern: ^(\d+(e\d+)?|\d+(\.\d+)?(e\d+)?[EPTGMK]i?)$
                                   type: string
+                                  pattern: '^(\d+(e\d+)?|\d+(\.\d+)?(e\d+)?[EPTGMK]i?)$'
+                                  # Note: the value specified here must not be zero.
                                 storageClass:
                                   type: string
                                 subPath:
                                   type: string
                                 throughput:
                                   type: integer
-                              required:
-                              - size
-                              type: object
                           required:
-                          - name
-                          - storage
+                            - name
+                            - storage
+                            - resource
                           type: object
                         minItems: 1
-                        nullable: true
-                        type: array
                         x-kubernetes-list-map-keys:
-                        - name
+                          - name
                         x-kubernetes-list-type: map
-                      resources:
-                        properties:
-                          limits:
-                            properties:
-                              cpu:
-                                pattern: ^(\d+m|\d+(\.\d{1,3})?)$
-                                type: string
-                              memory:
-                                pattern: ^(\d+(e\d+)?|\d+(\.\d+)?(e\d+)?[EPTGMK]i?)$
-                                type: string
-                            type: object
-                          requests:
-                            properties:
-                              cpu:
-                                pattern: ^(\d+m|\d+(\.\d{1,3})?)$
-                                type: string
-                              memory:
-                                pattern: ^(\d+(e\d+)?|\d+(\.\d+)?(e\d+)?[EPTGMK]i?)$
-                                type: string
-                            type: object
-                        type: object
                       restore:
+                        type: object
                         properties:
                           id:
                             type: string
+                          repo:
+                            type: string
+                            pattern: ^repo[1-4]$
                           options:
+                            type: object
                             additionalProperties:
                               type: string
+                      resources:
+                        type: object
+                        properties:
+                          limits:
                             type: object
-                          repo:
-                            pattern: ^repo[1-4]$
-                            type: string
-                        type: object
-                      env:
-                        type: array
-                        nullable: true
-                        items:
-                          type: object
-                          x-kubernetes-preserve-unknown-fields: true
-                      labels:
-                        type: object
-                        nullable: true
-                        additionalProperties:
-                          type: string
+                            properties:
+                              cpu:
+                                type: string
+                                pattern: '^(\d+m|\d+(\.\d{1,3})?)$'
+                              memory:
+                                type: string
+                                pattern: '^(\d+(e\d+)?|\d+(\.\d+)?(e\d+)?[EPTGMK]i?)$'
+                          requests:
+                            type: object
+                            properties:
+                              cpu:
+                                type: string
+                                pattern: '^(\d+m|\d+(\.\d{1,3})?)$'
+                              memory:
+                                type: string
+                                pattern: '^(\d+(e\d+)?|\d+(\.\d+)?(e\d+)?[EPTGMK]i?)$'
                     required:
-                    - image
-                    - repos
-                    type: object
-                type: object
+                      - image
+                      - repos
           status:
             type: object
             additionalProperties:

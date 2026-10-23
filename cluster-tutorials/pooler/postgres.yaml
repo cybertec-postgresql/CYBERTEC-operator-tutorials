@@ -1,0 +1,35 @@
+apiVersion: cpo.opensource.cybertec.at/v1
+kind: postgresql
+metadata:
+  name: ha-cluster-1
+spec:
+  dockerImage: 'containers.cybertec.at/cybertec-pg-container/postgres:rocky9-18.6-3'
+  numberOfInstances: 1
+  postgresql:
+    version: '18'
+  resources:
+    limits:
+      cpu: 500m
+      memory: 500Mi
+    requests:
+      cpu: 500m
+      memory: 500Mi
+  connectionPooler:
+    dockerImage: 'containers.cybertec.at/cybertec-pg-container/pgbouncer:rocky9-1.26.1-3'
+    mode: transaction
+    numberOfInstances: 2
+    resources:
+      limits:
+        cpu: '1'
+        memory: 100Mi
+      requests:
+        cpu: 500m
+        memory: 100Mi
+    schema: pooler
+    user: pooler
+  enableConnectionPooler: true
+  enableReplicaConnectionPooler: true
+  teamId: acid
+  volume:
+    size: 5Gi
+
